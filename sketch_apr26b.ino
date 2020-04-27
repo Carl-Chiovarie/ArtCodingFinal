@@ -1,8 +1,3 @@
-// Use if you want to force the software SPI subsystem to be used for some reason (generally, you don't)
-// #define FASTLED_FORCE_SOFTWARE_SPI
-// Use if you want to force non-accelerated pin access (hint: you really don't, it breaks lots of things)
-// #define FASTLED_FORCE_SOFTWARE_SPI
-// #define FASTLED_FORCE_SOFTWARE_PINS
 #include <FastLED.h>
 #define LED_PIN     3
 #define NUM_LEDS    60
@@ -15,18 +10,16 @@ CRGB leds[NUM_LEDS];
 int delayTime = 250;
 
 /*
-move top to bottom
-work one colomn at a time
 three types of changes
   combine colors
   shift colors down
   generate new colors
 
 those are gonna have to be three functions
-these actions will be the same for an led every time
+these actions will be the same for an led every frame        //This changed a bit in the future and I added some new types of changes
 
 every fourth LED will be the combination of two others
-  except for the last 8 colums
+ -except for the top 8 colums
 
 LED visual arrangment 
   O N M L K J I H
@@ -46,7 +39,7 @@ LED combinations
   F = L M  23 = 47 51
   G = N O  27 = 55 59
 
-  A will be the combination of B and C
+  'A' will be the combination of 'B' and 'C'
   I didnt want to use '+' since it would be confusing in the "pos number" diagram
 
   LED = (LED*2)+1 (LED*2)+1+4
